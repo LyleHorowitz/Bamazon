@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var inquirer = require('inquirer');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -7,12 +8,33 @@ var connection = mysql.createConnection({
     database: 'bamazonDB'
 });
 
-connection.connect(function(){
+connection.connect(function() {
 
 
-connection.query("SELECT * FROM bamazon_table", function(err, res)
-{
-console.log(res)
+            connection.query("SELECT * FROM bamazon_table", function(err, res) {
+                console.log(res)
+            });
+
+            inquirer.prompt([{
+                    type: "input",
+                    message: "What is the BSIN of the product you would like to buy?",
+                    name: "prompt1"
+                }])
+                .then(function(answers) {
+                        var BSIN = answers.prompt1
+            inquirer.prompt([{
+            		type: "input",
+            		message: "How many units would you like to buy?",
+            		name: "prompt2"
+            	}])
+            	.then(function(answers) {
+            			var stock = answers.prompt2
+            connection.query("SELECT stock_quantity FROM bamazon_table WHERE item_id='"+BSIN+"'", function(err, res) {
+            	console.log(res)
 });
 });
-
+});
+});
+ 						// check stock_quantity (SELECT/WHERE)
+                        // if statement (if stock is > user input, process order)
+                        // else statement (if stock is < user input, console log "Insufficent Quantity", stop order)
