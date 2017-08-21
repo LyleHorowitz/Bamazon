@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 var inquirer = require('inquirer');
-var cli_table = require('cli-table');
+var table = require('easy-table');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -14,9 +14,19 @@ connection.connect(function() {
 
 
     connection.query("SELECT * FROM bamazon_table", function(err, res) {
-        console.log(res)
-    });
+        // console.log(res)
+    // TABLE BELOW
+        var t = new table //
 
+        res.forEach(function(product) { //
+            t.cell('BSIN (Item #)', product.item_id) //
+            t.cell('Description', product.product_name) //
+            t.cell('Price, USD', product.price, table.number(2)) //
+            t.newRow() //
+        }) //
+
+        console.log(t.toString()) //
+         //
     inquirer.prompt([{
             type: "input",
             message: "What is the BSIN of the product you would like to buy?",
@@ -33,20 +43,19 @@ connection.connect(function() {
                     var stock = answers.prompt2
                     connection.query("SELECT stock_quantity FROM bamazon_table WHERE item_id='" + BSIN + "'", function(err, res) {
                         console.log(res)
-                            .then(function(answers) {
-                              // check stock_quantity (SELECT/WHERE)
-                            });
-                        if (function(res) {
-                             // if statement (if stock_quantity is > user input)
-                            });
-                        else(function(res) {
+                            
+                           
+                            // if statement (if stock_quantity is > user input, fulfill order)
+                          
                             // else statement (if stock is < user input, console log "Insufficent Quantity", stop order)
-                       	    });
-                        	// updated mySQL datatbase to reflect new quantity
-                        	// display total for customer
+                       	    
+                        	// update mySQL datatbase to reflect new quantity (see Great Bay)
+
+                        	// display total for customer (see Great Bay) -- USE RECURSION 
                     });
                 });
         });
-});				
 
-// insert CLI table
+    });
+
+});	

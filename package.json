@@ -1,0 +1,26 @@
+{
+  "name": "bamazondb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "dependencies": {
+    "easy-table": "^1.1.0",
+    "inquirer": "^3.2.2",
+    "mysql": "^2.14.1",
+    "cli-table": "^0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LyleHorowitz/Bamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LyleHorowitz/Bamazon/issues"
+  },
+  "homepage": "https://github.com/LyleHorowitz/Bamazon#readme"
+}
