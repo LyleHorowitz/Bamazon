@@ -37,7 +37,7 @@ connection.connect(function() {
                               // check stock_quantity (SELECT/WHERE)
                             });
                         if (function(res) {
-                             // if statement (if stock is > user input, process order)
+                             // if statement (if stock_quantity is > user input)
                             });
                         else(function(res) {
                             // else statement (if stock is < user input, console log "Insufficent Quantity", stop order)
