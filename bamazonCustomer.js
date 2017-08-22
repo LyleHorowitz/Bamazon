@@ -43,17 +43,32 @@ connection.connect(function() {
                     var stock = answers.prompt2
                     connection.query("SELECT stock_quantity FROM bamazon_table WHERE item_id='" + BSIN + "'", function(err, res) {
                         console.log(res)
-                            
-                           
-                            // if statement (if stock_quantity is > user input, fulfill order)
+
+                        var user_qty = res[0].stock_quantity
+                        if (res[0].stock_quantity - [newQty] > -1){
+                        	 var dept = res[0].department_name;
+               				 var newQty = res[0].stock_quantity - answers.stock_quantity;
+                			 var price = (answers.stock_quantity * res[0].price).toFixed(2);
+
+
+                            };
                           
-                            // else statement (if stock is < user input, console log "Insufficent Quantity", stop order)
+
+                    });
+                        connection.query("UPDATE bamazon_table SET ? WHERE ?", {
+                        	item_id: answers.item_id,
+                        	price: answers.price,
+                        	stock_quantity: answers.stock_quantity
+                        });
+
+                		
+                		});
+                            // else if statement (if stock is < user input, console log "Insufficent Quantity", stop order)
                        	    
                         	// update mySQL datatbase to reflect new quantity (see Great Bay)
 
                         	// display total for customer (see Great Bay) -- USE RECURSION 
-                    });
-                });
+
         });
 
     });
